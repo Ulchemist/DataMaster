@@ -1,0 +1,25 @@
+# 依赖与构建产物
+node_modules/
+backend/target/
+desktop/dist/
+desktop/runtime/
+desktop/runtime-win-x64/
+
+# 非仓库内容：在线版、数据、截图、内部文档
+site/
+demo/
+docs/
+output/
+tmp/
+backend/output/
+backend/tmp/
+.tmp/
+AGENTS.md
+run-demo.sh
+DataMaster_*.md
+
+# 系统与编辑器
+.DS_Store
+.idea/
+.codex-work/
+*.log
