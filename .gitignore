@@ -1,0 +1,20 @@
+# 依赖与构建产物
+node_modules/
+backend/target/
+desktop/dist/
+desktop/runtime/
+desktop/runtime-win-x64/
+
+# 在线版与本地工作区产物（本仓库仅开源桌面程序端）
+site/
+output/
+tmp/
+backend/output/
+backend/tmp/
+
+# 系统与编辑器
+.DS_Store
+.idea/
+.codex-work/
+*.log
+.tmp/

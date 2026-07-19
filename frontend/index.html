@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#eef1f6">
+  <meta name="description" content="DataMaster — 面向个人工作的 AI 经营分析工作台">
+  <title>DataMaster · AI 经营分析工作台</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 15v4h14v-4"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.34 5.66M20 5v6h-6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 1.45 4.55L18 9l-4.55 1.45L12 15l-1.45-4.55L6 9l4.55-1.45L12 3Zm6.5 11 .78 2.22L21.5 17l-2.22.78L18.5 20l-.78-2.22L15.5 17l2.22-.78L18.5 14Z"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7-3.5 2-1-2-3.46-2.2.4a7.2 7.2 0 0 0-1.6-.94L14.5 5h-5l-.7 2a7.2 7.2 0 0 0-1.6.94L5 7.54 3 11l2 1c0 .64.08 1.25.24 1.83L4 15.7l2.5 3.1 2.08-.8c.45.28.92.52 1.42.7l.5 2.3h4l.5-2.3c.5-.18.97-.42 1.42-.7l2.08.8 2.5-3.1-1.24-1.87c.16-.58.24-1.2.24-1.83Z"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .7-7.94A6 6 0 0 0 6.3 8.4 4.8 4.8 0 0 0 7 18Z"/><path d="m9 14 3-3 3 3m-3-3v7"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0 4-4m-4 4-4-4M5 19h14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4L19 7"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2.5 20h19L12 3Zm0 6v5m0 3h.01"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6V3Zm8 0v5h4M9 12h6m-6 4h6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="m3 3 18 18M10.6 6.1A10.3 10.3 0 0 1 12 6c6 0 9.5 6 9.5 6a14.8 14.8 0 0 1-2.1 2.8M6.6 6.6C4 8.3 2.5 12 2.5 12S6 18 12 18c1.1 0 2.2-.2 3.1-.5M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l2-2a5 5 0 0 0-7.08-7.08l-1.15 1.15m2.69 5.4a5 5 0 0 0-7.54-.55l-2 2a5 5 0 0 0 7.08 7.08l1.14-1.14"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10h-6v-6H9v6H3V10Z"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7"/></symbol>
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20v-1.5a4.5 4.5 0 0 0-4.5-4.5h-3A4.5 4.5 0 0 0 4 18.5V20M10 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7-1a3 3 0 0 0 0-6m3 17v-1.5a4.5 4.5 0 0 0-3-4.24"/></symbol>
+    <symbol id="i-bars" viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></symbol>
+    <symbol id="i-report" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5V3Z"/><path d="M15 3v5h4M8 17v-4m4 4V9m4 8v-6"/></symbol>
+    <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16m3-12-2 2 2 2"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><path d="M4 20v-2.2A3.8 3.8 0 0 1 7.8 14h3.4a3.8 3.8 0 0 1 3.8 3.8V20M9.5 10.5a3.7 3.7 0 1 0 0-7.4 3.7 3.7 0 0 0 0 7.4Z"/><path d="M15 7h5m-2.5-2.5V10M17 20v-1.4a3.2 3.2 0 0 0-2.2-3"/></symbol>
+    <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6V3Zm8 0v5h4"/><path d="M8.5 17v-5h1.4a1.5 1.5 0 0 1 0 3H8.5m4.1 2v-5h1.2c1.4 0 2.2.9 2.2 2.5S15.2 17 13.8 17h-1.2m5.1 0v-5h2.8m-2.8 2.2h2.1"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m3 11 18-8-8 18-2.2-7.8L3 11Zm7.8 2.2L21 3"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="header-inner">
+        <a class="brand" href="#mainContent" aria-label="DataMaster 首页">
+          <span class="brand-mark" aria-hidden="true"><b>D</b><i></i></span>
+          <span class="brand-copy"><strong>DataMaster</strong><small>AI 经营分析工作台</small></span>
+        </a>
+
+        <div class="desktop-context" aria-label="当前工作区">
+          <span class="context-path">个人空间</span><span aria-hidden="true">/</span><strong>经营分析项目</strong>
+        </div>
+
+        <div class="header-actions">
+          <span class="local-badge"><i></i>本机工作空间</span>
+          <button class="header-button clear-data-button" type="button" id="clearDataBtn" title="清空当前数据（保留 AI 与账户设置）" aria-label="清空当前数据">
+            <svg><use href="#i-close"></use></svg><span>清空数据</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="desktop-grid">
+      <aside class="desktop-sidebar" aria-label="工作室导航">
+        <div class="project-switcher">
+          <span class="project-icon"><svg><use href="#i-file"></use></svg></span>
+          <span><small>当前项目</small><strong id="projectNameLabel">未创建项目</strong></span>
+          <svg class="project-chevron"><use href="#i-chevron"></use></svg>
+        </div>
+
+        <nav class="view-tabs sidebar-nav primary-navigation" role="tablist" aria-label="分析视图">
+          <span class="nav-section-label">工作区</span>
+          <a class="nav-item" id="navHome" data-workspace="home" href="#mainContent"><svg><use href="#i-home"></use></svg><span id="nav-home">项目主页</span></a>
+          <a class="nav-item" id="navData" data-workspace="data" href="#dropZone"><svg><use href="#i-database"></use></svg><span id="nav-data">数据源</span><small id="sidebarSourceCount">本机</small></a>
+          <span class="nav-section-label analysis-label">分析</span>
+          <button class="nav-item" role="tab" type="button" id="tab-overview" data-view="overview" aria-controls="viewContent" aria-selected="true" tabindex="0">
+            <svg><use href="#i-bars"></use></svg><span><strong>经营总览</strong><small>结果与趋势</small></span>
+          </button>
+          <button class="nav-item" role="tab" type="button" id="tab-product" data-view="product" aria-controls="viewContent" aria-selected="false" tabindex="-1">
+            <svg><use href="#i-cube"></use></svg><span><strong>产品分析</strong><small>结构与毛利</small></span>
+          </button>
+          <button class="nav-item" role="tab" type="button" id="tab-customer" data-view="customer" aria-controls="viewContent" aria-selected="false" tabindex="-1">
+            <svg><use href="#i-users"></use></svg><span><strong>客户分析</strong><small>价值与集中度</small></span>
+          </button>
+          <button class="nav-item" role="tab" type="button" id="tab-profit" data-view="profit" aria-controls="viewContent" aria-selected="false" tabindex="-1">
+            <svg><use href="#i-bars"></use></svg><span><strong>利润与成本</strong><small>拆解与扭亏</small></span>
+          </button>
+          <button class="nav-item" role="tab" type="button" id="tab-salesGroup" data-view="salesGroup" aria-controls="viewContent" aria-selected="false" tabindex="-1">
+            <svg><use href="#i-team"></use></svg><span><strong>销售组利润</strong><small>阿米巴与下钻</small></span>
+          </button>
+          <a class="nav-item" id="navReport" data-workspace="report" href="#reportTools"><svg><use href="#i-report"></use></svg><span id="nav-report">报告中心</span></a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="nav-item" type="button" id="openSync" title="账户同步" aria-label="打开账户同步">
+            <svg><use href="#i-cloud"></use></svg><span>账户同步</span><i class="mini-dot" id="syncStatusDot"></i>
+          </button>
+          <button class="nav-item" type="button" id="openSettings" title="AI 设置" aria-label="打开 AI 设置">
+            <svg><use href="#i-settings"></use></svg><span>偏好设置</span><i class="mini-dot" id="providerStatusDot"></i>
+          </button>
+        </div>
+      </aside>
+
+      <main class="workspace" id="mainContent">
+        <header class="workspace-heading">
+          <div class="workspace-title">
+            <span class="page-kicker">分析工作台 / 当前任务</span>
+            <div class="title-line"><h1 id="pageTitle">经营总览</h1><span class="draft-badge">实时分析</span></div>
+            <p id="pageSubtitle">从收入、利润与风险开始，快速看清本期经营结果。</p>
+          </div>
+          <div class="workspace-actions" id="reportTools" aria-label="当前任务工具栏">
+            <button class="button button-secondary toolbar-export" type="button" id="downloadXlsx" disabled title="导出分析表">
+              <span class="file-badge xlsx">XLSX</span><span>分析表</span>
+            </button>
+            <button class="button button-secondary toolbar-export" type="button" id="downloadDocx" disabled title="导出经营报告">
+              <span class="file-badge docx">DOCX</span><span>经营报告</span>
+            </button>
+            <button class="button button-secondary toolbar-export" type="button" id="downloadPdf" disabled title="选择范围并导出 PDF">
+              <span class="file-badge pdf">PDF</span><span>详细报告</span>
+            </button>
+            <button class="button button-primary" type="button" id="importBtn" title="导入表格" aria-label="导入表格">
+              <svg><use href="#i-upload"></use></svg><span>导入数据</span>
+            </button>
+            <button class="icon-button inspector-toggle-button" type="button" id="inspectorToggle" title="收起检查器" aria-label="显示或收起检查器" aria-expanded="true"><svg><use href="#i-panel"></use></svg></button>
+            <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" multiple hidden>
+          </div>
+        </header>
+
+        <section class="workspace-canvas" aria-label="当前分析任务画布">
+          <section class="status-region" id="statusRegion" aria-live="polite"></section>
+
+          <section class="import-panel" id="dropZone" tabindex="0" role="button" aria-label="选择或拖放 Excel 和 CSV 文件">
+            <span class="import-icon"><svg><use href="#i-upload"></use></svg></span>
+            <div class="import-copy">
+              <strong id="importTitle">拖入 Excel，自动合并并完成经营分析</strong>
+              <p id="importDescription">支持多个 .xlsx、.xls、.csv 文件；字段自动识别，数据只在本机处理。</p>
+            </div>
+            <div class="import-meta" id="sourceSummary">
+              <span class="source-count" id="sourceCount">0 个文件</span>
+              <span class="import-cta">选择文件</span>
+            </div>
+          </section>
+
+          <section class="view-content" id="viewContent" role="tabpanel" aria-labelledby="tab-overview" aria-live="polite" aria-busy="true">
+            <div class="view-skeleton" aria-label="正在加载分析">
+              <div class="skeleton-line wide"></div>
+              <div class="skeleton-grid"><i></i><i></i><i></i><i></i></div>
+              <div class="skeleton-block"></div>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <aside class="desktop-inspector" aria-label="分析检查器">
+        <header class="inspector-header"><div><span>检查器</span><strong>当前分析上下文</strong></div><button type="button" class="inspector-close" data-toggle-inspector title="收起检查器" aria-label="收起检查器"><svg><use href="#i-close"></use></svg></button></header>
+        <div class="inspector-tabs" role="tablist" aria-label="检查器视图">
+          <input type="radio" role="tab" aria-label="摘要" aria-controls="inspector-panel-summary" aria-selected="true" name="inspector-tab" value="summary" id="inspector-summary" checked>
+          <label aria-hidden="true" for="inspector-summary">摘要</label>
+          <input type="radio" role="tab" aria-label="证据" aria-controls="inspector-panel-evidence" aria-selected="false" name="inspector-tab" value="evidence" id="inspector-evidence">
+          <label aria-hidden="true" for="inspector-evidence">证据</label>
+          <input type="radio" role="tab" aria-label="AI" aria-controls="inspector-panel-ai" aria-selected="false" name="inspector-tab" value="ai" id="inspector-ai">
+          <label aria-hidden="true" for="inspector-ai">AI</label>
+          <div class="inspector-panels">
+            <section class="inspector-panel summary-panel" id="inspector-panel-summary" role="tabpanel" aria-labelledby="inspector-summary">
+              <div id="inspectorSummaryContent" class="inspector-dynamic">
+                <span class="inspector-eyebrow">任务摘要</span>
+                <h2>从结论开始，再下钻到明细</h2>
+                <p>中央画布只显示当前分析任务。使用左侧导航切换维度，检查器保留辅助上下文。</p>
+                <dl class="inspector-facts"><div><dt>计算位置</dt><dd>本机</dd></div><div><dt>AI 参与计算</dt><dd>否</dd></div><div><dt>文件上传云端</dt><dd>否</dd></div></dl>
+              </div>
+            </section>
+            <section class="inspector-panel evidence-panel" id="inspector-panel-evidence" role="tabpanel" aria-labelledby="inspector-evidence">
+              <div id="inspectorEvidenceContent" class="inspector-dynamic">
+                <span class="inspector-eyebrow">证据账本</span>
+                <h2>每条结论都可复核</h2>
+                <p>点击画布中的证据标签，可打开对应口径、来源与计算值。</p>
+                <div class="inspector-tip"><svg><use href="#i-check"></use></svg><span>确定性计算与 AI 建议相互隔离</span></div>
+              </div>
+            </section>
+            <section class="inspector-panel ai-panel" id="inspector-panel-ai" role="tabpanel" aria-labelledby="inspector-ai">
+              <div id="inspectorAiContent" class="inspector-dynamic">
+                <span class="inspector-eyebrow">AI 助手</span>
+                <h2>解释结果，不改写数字</h2>
+                <p>AI 只读取经营摘要并生成建议。平台、模型和 API Key 可在偏好设置中管理。</p>
+                <label class="button button-secondary inspector-settings-shortcut" for="inspector-ai">在左下角打开偏好设置</label>
+              </div>
+            </section>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="desktop-statusbar" aria-label="应用状态">
+      <span class="status-chip"><i id="dataStatusDot"></i><span id="dataModeLabel">正在读取工作区</span></span>
+      <span class="status-divider" aria-hidden="true"></span>
+      <span id="desktopFileStatus">0 个文件</span>
+      <span class="status-divider" aria-hidden="true"></span>
+      <span id="desktopRowStatus">0 行有效</span>
+      <span class="status-divider" aria-hidden="true"></span>
+      <span id="desktopComputeStatus">等待计算</span>
+      <span class="status-spacer"></span>
+      <span id="desktopAiStatus">AI 待配置</span>
+      <span class="status-divider" aria-hidden="true"></span>
+      <span id="desktopSyncStatus">仅保存在本机</span>
+      <span class="status-divider" aria-hidden="true"></span>
+      <span id="generatedAt">—</span>
+      <span class="status-divider" aria-hidden="true"></span>
+      <span>DataMaster 0.6</span>
+    </footer>
+  </div>
+
+  <dialog class="modal settings-dialog" id="settingsDialog" aria-labelledby="settingsTitle">
+    <form method="dialog" class="modal-surface settings-surface" id="settingsForm">
+      <header class="modal-header">
+        <div><span class="page-kicker">连接你的模型</span><h2 id="settingsTitle">AI 平台与模型设置</h2><p>先选择平台，再选择模型。两套配置都会加密保存在本机。</p></div>
+        <button class="icon-button" type="button" id="closeSettings" aria-label="关闭 AI 设置"><svg><use href="#i-close"></use></svg></button>
+      </header>
+
+      <div class="settings-layout">
+        <section class="settings-step" aria-labelledby="platformStepTitle">
+          <div class="step-label"><span>1</span><div><strong id="platformStepTitle">选择 AI 平台</strong><small>可以分别保存两套配置</small></div></div>
+          <div class="provider-choices" id="providerChoices" role="radiogroup" aria-label="AI 平台"></div>
+          <div class="local-security"><svg><use href="#i-check"></use></svg><p><strong>密钥默认加密保存在本机</strong><span>只有你主动点击“推送本地配置”时才会同步到网页账户；密钥不会回显或写入分析文件。</span></p></div>
+        </section>
+
+        <section class="settings-detail" aria-labelledby="modelStepTitle">
+          <div class="step-label"><span>2</span><div><strong id="modelStepTitle">选择模型并连接</strong><small id="activeProviderHint">选择一个平台开始配置</small></div></div>
+          <div class="settings-fields" id="providerSettingsFields">
+            <label class="field" for="providerBaseUrl"><span>API 地址</span><input id="providerBaseUrl" type="url" autocomplete="url" spellcheck="false"></label>
+            <label class="field" for="providerModel"><span>模型</span><select id="providerModel"></select><small id="providerModelHelp">选择平台推荐模型，或使用自定义模型名称。</small></label>
+            <label class="field custom-model-field" for="providerCustomModel" id="customModelField" hidden><span>自定义模型 ID</span><input id="providerCustomModel" autocomplete="off" spellcheck="false" placeholder="输入平台支持的模型 ID"></label>
+            <label class="field" for="providerApiKey"><span>API Key</span><span class="key-field"><input id="providerApiKey" type="password" autocomplete="new-password" spellcheck="false" placeholder="输入新的 API Key"><button type="button" id="toggleApiKey" aria-label="显示 API Key" aria-pressed="false"><svg><use href="#i-eye"></use></svg></button></span><small id="apiKeyHelp">保存后输入框会自动清空。</small></label>
+          </div>
+          <div class="connection-result" id="providerConnectionState" aria-live="polite"><span>尚未测试连接</span></div>
+          <div class="modal-actions settings-actions">
+            <button class="button button-secondary" type="button" id="testProvider">测试连接</button>
+            <button class="button button-primary" type="button" id="saveProvider">保存配置</button>
+          </div>
+        </section>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="modal sync-dialog" id="syncDialog" aria-labelledby="syncTitle">
+    <form method="dialog" class="modal-surface sync-surface">
+      <header class="modal-header">
+        <div><span class="page-kicker">跨设备保持一致</span><h2 id="syncTitle">账户同步</h2><p>在网页账户中生成一次性同步令牌，然后粘贴到这里连接本地程序。</p></div>
+        <button class="icon-button" type="button" id="closeSync" aria-label="关闭账户同步"><svg><use href="#i-close"></use></svg></button>
+      </header>
+      <section class="sync-status-card" id="syncStatusCard" aria-live="polite">
+        <span class="sync-mark"><svg><use href="#i-cloud"></use></svg></span>
+        <div><strong>正在读取同步状态…</strong><p>请稍候</p></div>
+      </section>
+      <label class="field token-field" for="syncToken"><span>网页同步令牌</span><textarea id="syncToken" rows="3" autocomplete="off" spellcheck="false" placeholder="粘贴网页端生成的同步令牌"></textarea><small>令牌只用于建立连接；成功后会立即从输入框清除。</small></label>
+      <div class="sync-actions">
+        <a class="button button-secondary" id="openSyncSite" href="https://datamaster-analysis.odozidahe433.chatgpt.site" target="_blank" rel="noopener noreferrer"><svg><use href="#i-cloud"></use></svg><span>打开网页版获取令牌</span></a>
+        <button class="button button-primary" type="button" id="connectSync"><svg><use href="#i-link"></use></svg><span>连接账户</span></button>
+        <button class="button button-secondary" type="button" id="pullSync"><svg><use href="#i-arrow-down"></use></svg><span>拉取云端配置</span></button>
+        <button class="button button-secondary" type="button" id="pushSync"><svg><use href="#i-arrow-up"></use></svg><span>推送本地配置</span></button>
+        <button class="button button-danger-ghost" type="button" id="disconnectSync">断开连接</button>
+      </div>
+      <p class="sync-note"><svg><use href="#i-info"></use></svg><span>同步范围包含偏好、模型和已配置的 API Key；不会上传你的 Excel、Word 或经营分析数据。</span></p>
+    </form>
+  </dialog>
+
+  <dialog class="modal pdf-export-dialog" id="pdfExportDialog" aria-labelledby="pdfExportTitle">
+    <form method="dialog" class="modal-surface pdf-export-surface" id="pdfExportForm">
+      <header class="modal-header">
+        <div><span class="page-kicker">EXPORT REPORT</span><h2 id="pdfExportTitle">选择 PDF 报告范围</h2><p>默认导出完整报告，也可以只勾选本次汇报需要的章节。</p></div>
+        <button class="icon-button" type="button" id="closePdfExport" aria-label="关闭 PDF 导出设置"><svg><use href="#i-close"></use></svg></button>
+      </header>
+      <div class="pdf-preset-row" role="group" aria-label="快速选择报告范围">
+        <button class="scope-preset active" type="button" data-pdf-preset="all">完整报告</button>
+        <button class="scope-preset" type="button" data-pdf-preset="current">仅当前分析</button>
+        <button class="scope-preset" type="button" data-pdf-preset="clear">重新选择</button>
+      </div>
+      <fieldset class="pdf-scope-grid">
+        <legend>报告章节</legend>
+        <label><input type="checkbox" name="pdfScope" value="overview" checked><span><strong>经营总览</strong><small>核心指标、趋势与经营结论</small></span></label>
+        <label><input type="checkbox" name="pdfScope" value="product" checked><span><strong>产品分析</strong><small>产品结构、量价与利润质量</small></span></label>
+        <label><input type="checkbox" name="pdfScope" value="customer" checked><span><strong>客户分析</strong><small>客户价值、渠道与产品下钻</small></span></label>
+        <label><input type="checkbox" name="pdfScope" value="profit" checked><span><strong>利润与成本</strong><small>利润结构与扭亏建议</small></span></label>
+        <label><input type="checkbox" name="pdfScope" value="salesGroup" checked><span><strong>销售组利润</strong><small>阿米巴口径与组织下钻</small></span></label>
+        <label><input type="checkbox" name="pdfScope" value="evidence" checked><span><strong>证据附录</strong><small>计算口径、数据质量与证据索引</small></span></label>
+      </fieldset>
+      <div class="pdf-export-summary" aria-live="polite"><svg><use href="#i-pdf"></use></svg><span id="pdfExportSummary">将导出 6 个章节 · 详细版 PDF</span></div>
+      <div class="modal-actions pdf-export-actions">
+        <button class="button button-secondary" type="button" id="cancelPdfExport">取消</button>
+        <button class="button button-primary" type="submit" id="confirmPdfExport"><svg><use href="#i-download"></use></svg><span>生成 PDF</span></button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="evidence-drawer" id="evidenceDrawer" hidden>
+    <button class="drawer-scrim" type="button" tabindex="-1" aria-label="关闭证据详情" data-close-evidence></button>
+    <section role="dialog" aria-modal="true" aria-labelledby="evidenceDrawerTitle" tabindex="-1">
+      <header class="drawer-header">
+        <div><span class="page-kicker">Evidence ledger</span><h2 id="evidenceDrawerTitle">证据详情</h2><p>每条结论都可以回到确定性计算结果复核。</p></div>
+        <button class="icon-button" type="button" data-close-evidence aria-label="关闭证据详情"><svg><use href="#i-close"></use></svg></button>
+      </header>
+      <div class="drawer-body" id="evidenceDrawerBody"></div>
+    </section>
+  </div>
+
+  <div class="chart-tooltip" id="chartTooltip" role="status" hidden></div>
+  <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: datamaster
+  servlet:
+    multipart:
+      # 业务限制是 500 MiB 文件内容；请求上限额外预留 multipart 边界与表头开销，
+      # 避免恰好 500 MiB 的单文件因几十字节协议开销被提前拒绝。
+      max-file-size: 500MB
+      max-request-size: 512MB
+      file-size-threshold: 1MB
+      location: ${DATAMASTER_UPLOAD_TEMP:${java.io.tmpdir}}
+      resolve-lazily: true
+server:
+  port: 8765
+  address: 127.0.0.1
+  error:
+    include-message: never
+datamaster:
+  workspace:
+    # 最近工作区只在用户显式清空时删除；可用 DATAMASTER_WORKSPACE_PATH 覆盖位置。
+    path: ${DATAMASTER_WORKSPACE_PATH:${user.home}/.datamaster/workspace}
+  import:
+    # 解析后的明细仍需保留给图表与导出，因此行数限制独立于上传文件大小。
+    max-rows: ${DATAMASTER_IMPORT_MAX_ROWS:1000000}
+  sync:
+    remote-base-url: ${DATAMASTER_SYNC_URL:https://datamaster-analysis.odozidahe433.chatgpt.site}

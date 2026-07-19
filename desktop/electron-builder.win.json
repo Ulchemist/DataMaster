@@ -1,0 +1,38 @@
+{
+  "appId": "com.datamaster.personal",
+  "productName": "DataMaster",
+  "asar": true,
+  "files": [
+    "main.cjs",
+    "preload.cjs",
+    "package.json"
+  ],
+  "extraResources": [
+    {
+      "from": "../backend/target/datamaster-demo-0.1.0.jar",
+      "to": "backend/datamaster.jar"
+    },
+    {
+      "from": "runtime-win-x64",
+      "to": "runtime"
+    }
+  ],
+  "directories": {
+    "output": "dist"
+  },
+  "win": {
+    "icon": "build/icon.ico",
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ]
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true
+  }
+}
