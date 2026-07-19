@@ -23,7 +23,6 @@ function writeDevelopmentLog(message) {
   }
 }
 
-const ONLINE_APP_URL = "https://datamaster-analysis.odozidahe433.chatgpt.site";
 const WINDOW_STATE_FILE = "window-state.json";
 const DEFAULT_WINDOW_BOUNDS = Object.freeze({ width: 1520, height: 960 });
 const MIN_WINDOW_BOUNDS = Object.freeze({ width: 1080, height: 720 });
@@ -464,7 +463,6 @@ function buildApplicationMenu() {
       label: "帮助",
       submenu: [
         { label: "快捷键", click: () => sendMenuCommand("show-shortcuts") },
-        { label: "打开 DataMaster 在线版", click: () => shell.openExternal(ONLINE_APP_URL) },
       ],
     },
   ];
@@ -644,6 +642,9 @@ async function createWindow() {
     minHeight: MIN_WINDOW_BOUNDS.height,
     backgroundColor: "#f5f7fb",
     show: false,
+    // Windows 上把菜单栏收进 Alt 键（VS Code 等现代应用的标准做法），
+    // 避免 macOS 式顶部菜单挤在窗口里显得难看；macOS 仍保留系统菜单栏。
+    autoHideMenuBar: process.platform === "win32",
     webPreferences: {
       preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
